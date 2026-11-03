@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Gilded Code — Abundance by Design | by Kael Varnow</title>
+<meta name="description" content="There is a pattern behind every fortune. The Gilded Code by Kael Varnow is about learning to see it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0e17;
+  --ink-2:#0d1220;
+  --ink-3:#101625;
+  --line:#232c44;
+  --gold:#ecc76f;
+  --gold-bright:#f9e4a6;
+  --gold-deep:#d4a94e;
+  --gold-dim:rgba(236,199,111,.35);
+  --red:#8f1626;
+  --text:#b6bdcd;
+  --text-dim:#7d879c;
+  --text-bright:#f4f6fb;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink);
+  color:var(--text);
+  font-family:'Inter',system-ui,sans-serif;
+  font-size:16px;
+  line-height:1.65;
+  overflow-x:hidden;
+}
+body::before{
+  content:'';
+  position:fixed; inset:0;
+  pointer-events:none; z-index:1;
+  background:
+    radial-gradient(1200px 500px at 80% -5%, rgba(164,31,43,.07), transparent 60%),
+    radial-gradient(900px 500px at 10% 105%, rgba(236,199,111,.05), transparent 60%);
+}
+main{position:relative;z-index:2}
+
+::selection{background:rgba(236,199,111,.25);color:#fff}
+
+/* ---------- reveal animations ---------- */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .9s var(--ease-out),transform .9s var(--ease-out);will-change:opacity,transform}
+.reveal.in{opacity:1;transform:none}
+.reveal-zoom{opacity:0;transform:scale(.94);transition:opacity 1s var(--ease-out),transform 1s var(--ease-out)}
+.reveal-zoom.in{opacity:1;transform:none}
+.stagger>*{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease-out),transform .8s var(--ease-out)}
+.stagger.in>*{opacity:1;transform:none}
+
+/* ---------- marquee ---------- */
+.marquee{background:linear-gradient(90deg,#6d0f1e,#9a1d2e 50%,#6d0f1e);color:#f6e7c1;font:600 10px/1 'Inter',sans-serif;letter-spacing:.24em;padding:10px 0;white-space:nowrap;overflow:hidden;position:relative;z-index:3}
+.marquee span{display:inline-block;animation:mq 26s linear infinite}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- header ---------- */
+.header{display:flex;align-items:center;padding:14px 26px;border-bottom:1px solid var(--line);background:rgba(6,8,14,.72);backdrop-filter:blur(12px);position:sticky;top:0;z-index:5}
+.header .menu-btn,.header .icn{display:flex;align-items:center;justify-content:center;width:34px;height:34px;color:var(--text);cursor:pointer;transition:color .3s}
+.header .menu-btn:hover,.header .icn:hover{color:var(--gold-bright)}
+.header .logo{position:absolute;left:50%;transform:translateX(-50%);font:700 15px/1 'Oswald',sans-serif;letter-spacing:.34em;color:var(--gold-bright);text-decoration:none;transition:letter-spacing .5s var(--ease-out)}
+.header .logo:hover{letter-spacing:.42em}
+.header .right{margin-left:auto;display:flex;gap:8px}
+.header svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- hero ---------- */
+.hero{text-align:center;padding:clamp(56px,9vh,110px) 24px 64px;position:relative;
+  background:radial-gradient(820px 380px at 50% 26%,rgba(236,199,111,.13),transparent 66%),
+             radial-gradient(1100px 520px at 50% 118%,rgba(164,31,43,.14),transparent 62%);}
+.kicker{font:600 11px/1 'Inter',sans-serif;letter-spacing:.36em;color:var(--gold);text-transform:uppercase}
+.hero-title{font:700 clamp(52px,8.5vw,96px)/.98 'Oswald',sans-serif;color:var(--text-bright);letter-spacing:.02em;margin-top:22px}
+.hero-title .grad{background:linear-gradient(180deg,#fdf3cf 0%,var(--gold-bright) 42%,var(--gold) 62%,#c99b3f 96%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{display:block;font:italic 500 clamp(22px,3vw,32px)/1.2 'Playfair Display',serif;color:var(--gold-bright);letter-spacing:.02em;margin-top:14px;text-transform:none}
+.hero-copy{font-size:15.5px;color:var(--text);max-width:590px;margin:24px auto 0}
+.hero-copy b{color:var(--text-bright);font-weight:600}
+.hero-bookrow{display:flex;align-items:center;justify-content:center;gap:clamp(28px,5vw,56px);margin:48px 0 8px;flex-wrap:wrap}
+.buy-card{width:250px;padding:24px 22px;background:linear-gradient(180deg,var(--ink-3),#0c1120);border:1px solid var(--gold-dim);border-radius:6px;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.buy-card .price{font:700 26px 'Inter',sans-serif;color:#fff;letter-spacing:.02em}
+.buy-card .format{font:600 9.5px 'Inter',sans-serif;letter-spacing:.2em;color:var(--text-dim);margin:6px 0 18px;text-transform:uppercase}
+.trust{display:flex;justify-content:center;gap:26px;flex-wrap:wrap;font-size:12px;color:var(--text-dim);margin-top:36px;padding-top:18px;border-top:1px solid rgba(236,199,111,.15);max-width:640px;margin-left:auto;margin-right:auto}
+.trust span{display:flex;align-items:center;gap:7px}
+.trust svg{width:14px;height:14px;stroke:var(--gold);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* buttons */
+.btn{display:inline-block;background:linear-gradient(180deg,#fdf0bd,var(--gold-bright) 38%,var(--gold) 70%,#c99b3f);color:#231503;font:700 12px 'Inter',sans-serif;letter-spacing:.2em;text-transform:uppercase;padding:16px 30px;border-radius:2px;text-decoration:none;border:0;cursor:pointer;position:relative;overflow:hidden;box-shadow:0 14px 36px rgba(236,199,111,.22);transition:transform .35s var(--ease-out),box-shadow .35s var(--ease-out)}
+.btn:hover{transform:translateY(-3px);box-shadow:0 22px 48px rgba(236,199,111,.38)}
+.btn:active{transform:translateY(-1px)}
+.btn::after{content:'';position:absolute;top:0;left:-80%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);transition:left .7s var(--ease-out)}
+.btn:hover::after{left:130%}
+.btn-ghost{display:inline-block;font:600 11px 'Inter',sans-serif;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-bright);text-decoration:none;border-bottom:1px solid var(--gold-dim);padding-bottom:6px;transition:color .3s,border-color .3s}
+.btn-ghost:hover{color:#fff;border-color:var(--gold-bright)}
+
+/* ---------- book mockup ---------- */
+.book-wrap{position:relative;display:inline-block;animation:float 7s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.book{position:relative;width:200px;height:288px;border-radius:4px 12px 12px 4px;
+  background:linear-gradient(115deg,#170708 0%,#3a0e13 45%,#7a1620 78%,#a41f2b 100%);
+  box-shadow:0 36px 70px rgba(0,0,0,.7),inset 0 0 0 1px rgba(249,228,166,.3);
+  transform:perspective(950px) rotateY(-13deg) rotateX(2deg);
+  display:flex;flex-direction:column;align-items:center;text-align:center;padding:24px 14px;
+  filter:drop-shadow(0 0 46px rgba(236,199,111,.28));}
+.book::before{content:'';position:absolute;inset:0 auto 0 0;width:15px;border-radius:4px 0 0 4px;background:linear-gradient(90deg,#080203,#2a0a0e 60%,rgba(0,0,0,0))}
+.book .bk{font:italic 500 10px 'Playfair Display',serif;color:var(--gold-bright)}
+.book .bt{font:700 27px/1.06 'Oswald',sans-serif;letter-spacing:.05em;color:#f6e9c2;margin-top:10px;text-shadow:0 0 22px rgba(236,199,111,.5)}
+.book .bs{font:italic 500 12px 'Playfair Display',serif;color:var(--gold-bright);margin-top:8px}
+.book .ba{margin-top:auto;font:600 10px 'Inter',sans-serif;letter-spacing:.3em;color:#f6e9c2}
+.badge{position:absolute;top:-20px;right:-30px;width:88px;height:88px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#d23449,#7d1224);
+  box-shadow:0 12px 28px rgba(164,31,43,.55),inset 0 0 0 2px rgba(249,228,166,.4);
+  color:#f8ecd0;font:600 10px/1.35 'Inter',sans-serif;display:flex;align-items:center;justify-content:center;text-align:center;transform:rotate(10deg);animation:badgepulse 3.2s ease-in-out infinite}
+.badge i{font-style:italic;font-family:'Playfair Display',serif;font-size:12px}
+@keyframes badgepulse{0%,100%{transform:rotate(10deg) scale(1)}50%{transform:rotate(10deg) scale(1.06)}}
+
+/* ---------- section commons ---------- */
+section{padding:96px 24px}
+.section-label{font:600 11px/1 'Inter',sans-serif;letter-spacing:.34em;color:var(--gold);text-transform:uppercase;text-align:center}
+.section-head{font:700 clamp(30px,4.4vw,46px)/1.05 'Oswald',sans-serif;color:var(--text-bright);letter-spacing:.02em;text-align:center}
+.section-head em{font:italic 500 .82em 'Playfair Display',serif;color:var(--gold-bright);text-transform:lowercase;letter-spacing:.02em}
+.center{text-align:center}
+
+/* ---------- inside / chapters ---------- */
+.chapters{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:1040px;margin:52px auto 0}
+.chapter{background:linear-gradient(180deg,#131a2d,#0b101d);border:1px solid var(--line);border-top:1px solid rgba(236,199,111,.55);border-radius:4px;padding:26px 20px;text-align:left;min-height:190px;transition:transform .45s var(--ease-out),border-color .45s,box-shadow .45s}
+.chapter:hover{transform:translateY(-8px);border-color:var(--gold-dim);box-shadow:0 24px 50px rgba(0,0,0,.45)}
+.chapter .num{font:italic 500 26px 'Playfair Display',serif;color:#c22b3e}
+.chapter h4{font:700 14px 'Oswald',sans-serif;letter-spacing:.16em;color:var(--gold-bright);margin:14px 0 10px;text-transform:uppercase}
+.chapter p{font-size:13px;color:var(--text-dim)}
+.quote{position:relative;max-width:660px;margin:64px auto 0;padding:10px 34px}
+.quote .q{font:italic 500 clamp(18px,2.6vw,24px)/1.5 'Playfair Display',serif;color:var(--text-bright)}
+.quote .rule{width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);border-bottom:1px solid var(--gold);margin:20px auto 18px}
+.anchor-link{font:600 11px 'Inter',sans-serif;letter-spacing:.26em;color:var(--gold);text-transform:uppercase;text-decoration:none;border-bottom:1px solid var(--gold-dim);padding-bottom:5px;transition:color .3s,border-color .3s,letter-spacing .4s var(--ease-out)}
+.anchor-link:hover{color:#fff;border-color:#fff;letter-spacing:.32em}
+
+/* ---------- author ---------- */
+.author-band{background:var(--ink-2)}
+.author{display:flex;gap:44px;align-items:center;max-width:880px;margin:40px auto 0}
+.portrait{width:170px;height:216px;flex:0 0 auto;border:1px solid var(--gold-dim);border-radius:4px;background:radial-gradient(circle at 50% 28%,#1b2439,#0b0f1a 78%);display:flex;align-items:center;justify-content:center;font:italic 500 11px 'Playfair Display',serif;color:#525b70;text-align:center;padding:10px}
+.author h3{font:italic 500 clamp(20px,2.6vw,26px) 'Playfair Display',serif;color:#efdfae;margin-bottom:14px}
+.author p{font-size:14.5px}
+.author p+p{margin-top:12px}
+
+/* ---------- discover ---------- */
+.discover{max-width:760px;margin:48px auto 0;text-align:left}
+.dr{display:flex;gap:18px;padding:18px 6px;border-bottom:1px solid var(--line);align-items:baseline;transition:background .35s,padding-left .35s var(--ease-out)}
+.dr:hover{background:rgba(236,199,111,.04);padding-left:14px}
+.dr .n{font:italic 500 19px 'Playfair Display',serif;color:var(--gold);min-width:36px}
+.dr p{font-size:15px;color:#c7cedc;margin:0}
+.discover .moral{font:italic 500 16px 'Playfair Display',serif;color:var(--text-dim);text-align:center;margin-top:30px}
+
+/* ---------- FAQ ---------- */
+.faq-band{background:var(--ink-2)}
+.faq{max-width:730px;margin:44px auto 0;text-align:left}
+.fq{border-bottom:1px solid var(--line)}
+.fq-q{width:100%;background:none;border:0;color:var(--text-bright);font:600 14.5px 'Inter',sans-serif;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 4px;cursor:pointer;text-align:left;transition:color .3s}
+.fq-q:hover{color:var(--gold-bright)}
+.fq-q .plus{flex:0 0 auto;width:26px;height:26px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .45s var(--ease-out),background .3s,color .3s}
+.fq.open .plus{transform:rotate(45deg);background:var(--gold);color:#231503}
+.fq-a{max-height:0;overflow:hidden;transition:max-height .55s var(--ease-out)}
+.fq-a p{font-size:14px;color:var(--text-dim);padding:0 40px 20px 4px}
+
+/* ---------- closing ---------- */
+.closing{text-align:center;padding:clamp(80px,12vh,130px) 24px;background:radial-gradient(780px 340px at 50% 108%,rgba(236,199,111,.13),transparent 70%)}
+.closing .big{font:700 clamp(34px,5.4vw,58px)/1.08 'Oswald',sans-serif;letter-spacing:.02em}
+.closing .big .grad{background:linear-gradient(180deg,#fdf3cf,var(--gold-bright) 45%,var(--gold) 72%,#c99b3f);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.closing .tag{font:italic 500 17px 'Playfair Display',serif;color:var(--text-dim);margin:22px 0 34px}
+
+/* ---------- footer ---------- */
+.footer{padding:24px 30px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;font-size:10.5px;color:#525b70;letter-spacing:.1em}
+.footer a{color:#525b70;text-decoration:none;transition:color .3s}
+.footer a:hover{color:var(--gold-bright)}
+
+/* ---------- responsive ---------- */
+@media(max-width:900px){
+  .chapters{grid-template-columns:repeat(2,1fr)}
+  .chapters .chapter:nth-child(4){grid-column:1/-1}
+}
+@media(max-width:680px){
+  section{padding:70px 20px}
+  .hero-bookrow{flex-direction:column;gap:44px}
+  .buy-card{width:min(340px,100%)}
+  .author{flex-direction:column;text-align:center;gap:26px}
+  .portrait{width:150px;height:190px}
+  .chapters{grid-template-columns:1fr}
+  .chapters .chapter{min-height:0}
+  .header .logo{letter-spacing:.22em}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+  html{scroll-behavior:auto}
+  .reveal,.reveal-zoom,.stagger>*{opacity:1!important;transform:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="marquee" aria-hidden="true">
+  <span>
+    ☆ READ WHAT OTHERS OVERLOOKED &nbsp;·&nbsp;&nbsp; THE GILDED CODE — NOW UNSEALED &nbsp;·&nbsp;&nbsp;
+    READ WHAT OTHERS OVERLOOKED &nbsp;·&nbsp;&nbsp; THE GILDED CODE — NOW UNSEALED &nbsp;·&nbsp;&nbsp;
+    READ WHAT OTHERS OVERLOOKED &nbsp;·&nbsp;&nbsp; THE GILDED CODE — NOW UNSEALED &nbsp;·&nbsp;&nbsp;
+    READ WHAT OTHERS OVERLOOKED &nbsp;·&nbsp;&nbsp; THE GILDED CODE — NOW UNSEALED &nbsp;·&nbsp;&nbsp;
+  </span>
+</div>
+
+<header class="header">
+  <span class="menu-btn" aria-label="Menu">
+    <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h12"/></svg>
+  </span>
+  <a class="logo" href="#top">THE GILDED CODE</a>
+  <div class="right">
+    <span class="icn" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
+    <span class="icn" aria-label="Account"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></span>
+    <span class="icn" aria-label="Cart"><svg viewBox="0 0 24 24"><path d="M6 7h12l-1.2 12H7.2L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></span>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="kicker" data-hero style="animation-delay:.05s">You've walked past it your whole life</div>
+    <h1 class="hero-title" data-hero style="animation-delay:.2s">THE <span class="grad">GILDED CODE</span><span class="hero-sub">Abundance by Design</span></h1>
+    <p class="hero-copy" data-hero style="animation-delay:.4s">
+      There is a pattern behind every fortune. It shows up in the way certain people speak,
+      the rooms they choose, the moves they make while everyone else is watching the wrong thing.
+      It repeats across industries, cities and generations.
+      <b>Most people never notice it — and that's exactly why it works.</b>
+      The Gilded Code is about learning to see it.
+    </p>
+    <div class="hero-bookrow" data-hero style="animation-delay:.55s">
+      <div class="book-wrap">
+        <div class="book">
+          <div class="bk">The Pattern Behind</div>
+          <div class="bt">THE<br>GILDED<br>CODE</div>
+          <div class="bs">Abundance by Design</div>
+          <div class="ba">KAEL VARNOW</div>
+        </div>
+        <div class="badge">NOW<br><i>Unsealed</i></div>
+      </div>
+      <div class="buy-card">
+        <div class="price">$—.–</div>
+        <div class="format">Price set at checkout &nbsp;·&nbsp; PDF eBook</div>
+        <a class="btn" href="#" title="Checkout coming soon">Get Instant Access</a>
+      </div>
+    </div>
+    <div class="trust" data-hero style="animation-delay:.7s">
+      <span><svg viewBox="0 0 24 24"><path d="M13 2 5 13h6l-2 9 8-11h-6l2-9z"/></svg> Instant PDF download</span>
+      <span><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> Secure checkout</span>
+      <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg> Satisfaction guaranteed</span>
+    </div>
+  </section>
+
+  <!-- INSIDE THE BOOK -->
+  <section id="inside" class="center">
+    <div class="section-label reveal">Inside the Book</div>
+    <h2 class="section-head reveal" style="transition-delay:.08s">WHAT LIES <em>behind</em> THE FORTUNE</h2>
+    <p class="hero-copy reveal" style="transition-delay:.16s;margin-top:18px;font-size:14.5px;max-width:640px">
+      The same hidden mechanism, seen again and again — in boardrooms and corner offices,
+      in headlines and quiet deals. The Gilded Code examines the recurring patterns
+      beneath money, status and opportunity.
+    </p>
+    <div class="chapters stagger">
+      <div class="chapter"><div class="num">I</div><h4>The Pattern</h4><p>The recurring patterns behind how wealth is built, protected — and passed on.</p></div>
+      <div class="chapter"><div class="num">II</div><h4>The Quiet Moves</h4><p>Why the most important moves are the ones nobody announces.</p></div>
+      <div class="chapter"><div class="num">III</div><h4>Reading Rooms</h4><p>How to read people, rooms and situations the way insiders do.</p></div>
+      <div class="chapter"><div class="num">IV</div><h4>The Rise</h4><p>The quiet habits that separate those who rise from those who stay in place.</p></div>
+    </div>
+    <div class="quote reveal">
+      <div class="q">"Most people spend their lives circling what they were never taught to see."</div>
+      <div class="rule"></div>
+      <a class="anchor-link" href="#inside" style="margin-top:16px">Enter the Book</a>
+    </div>
+  </section>
+
+  <!-- AUTHOR -->
+  <section class="author-band">
+    <div class="section-label reveal">The Author</div>
+    <div class="author">
+      <div class="portrait reveal-zoom">Author<br>portrait<br><span style="opacity:.6">placeholder</span></div>
+      <div class="reveal" style="transition-delay:.15s">
+        <h3>Kael Varnow sees what everyone else walks past.</h3>
+        <p>Kael Varnow strips away the noise and reveals the patterns that separate people who
+        build lasting wealth and power from those who spend their lives circling it.</p>
+        <p>Once you can read the code, you can't unsee it. Headlines, deals, careers and
+        conversations all start to look different.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DISCOVER -->
+  <section class="center">
+    <div class="section-label reveal">What You'll Discover</div>
+    <div class="discover">
+      <div class="dr reveal"><div class="n">01</div><p>How to read people, rooms and situations the way insiders do</p></div>
+      <div class="dr reveal" style="transition-delay:.07s"><div class="n">02</div><p>The recurring patterns behind how wealth is built, protected and passed on</p></div>
+      <div class="dr reveal" style="transition-delay:.14s"><div class="n">03</div><p>Why the most important moves are the ones nobody announces</p></div>
+      <div class="dr reveal" style="transition-delay:.21s"><div class="n">04</div><p>The quiet habits that separate those who rise from those who stay in place</p></div>
+      <div class="dr reveal" style="transition-delay:.28s"><div class="n">05</div><p>How to turn what you now see into a life of abundance you design for yourself</p></div>
+      <div class="moral reveal" style="transition-delay:.4s">This book won't tell you what to chase. It will change what you notice.</div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-band">
+    <div class="section-label reveal">Before You Step Inside</div>
+    <h2 class="section-head reveal" style="transition-delay:.08s">QUESTIONS &amp; ANSWERS</h2>
+    <div class="faq stagger">
+      <div class="fq">
+        <button class="fq-q">What is The Gilded Code by Kael Varnow about?<span class="plus">+</span></button>
+        <div class="fq-a"><p>It's a book about learning to see the pattern behind every fortune — how wealth, power
+        and opportunity really move, and why most people never notice until someone shows them where to look.</p></div>
+      </div>
+      <div class="fq">
+        <button class="fq-q">What format is the book?<span class="plus">+</span></button>
+        <div class="fq-a"><p>The Gilded Code is available as a PDF eBook you can read instantly on any device.</p></div>
+      </div>
+      <div class="fq">
+        <button class="fq-q">How do I receive my book after purchase?<span class="plus">+</span></button>
+        <div class="fq-a"><p>Immediately. As soon as your order is complete, you get a download link — the book is yours
+        to read within minutes.</p></div>
+      </div>
+      <div class="fq">
+        <button class="fq-q">Can I read it on my phone, tablet or e-reader?<span class="plus">+</span></button>
+        <div class="fq-a"><p>Yes. The PDF opens on phones, tablets, laptops and most e-readers. Yours to keep, read anywhere.</p></div>
+      </div>
+      <div class="fq">
+        <button class="fq-q">Is checkout secure?<span class="plus">+</span></button>
+        <div class="fq-a"><p>Your payment is handled over an encrypted connection. Nothing about your card details is
+        stored or visible to anyone involved in delivering the book.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="closing">
+    <h2 class="big reveal">SOME PEOPLE SPEND A LIFETIME LOOKING.<br><span class="grad">A FEW LEARN HOW TO SEE.</span></h2>
+    <div class="tag reveal" style="transition-delay:.12s">Crack the code. Design the life.</div>
+    <div class="reveal" style="transition-delay:.22s"><a class="btn" href="#" title="Checkout coming soon">Get The Gilded Code</a></div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <span>© THE GILDED CODE — ABUNDANCE BY DESIGN, BY KAEL VARNOW</span>
+  <span><a href="#">PRIVACY</a> &nbsp;·&nbsp; <a href="#">TERMS</a> &nbsp;·&nbsp; <a href="#">CONTACT</a></span>
+</footer>
+
+<script>
+// ----- hero entrance -----
+window.addEventListener('load', () => {
+  document.querySelectorAll('[data-hero]').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(26px)';
+    el.style.filter = 'blur(6px)';
+    const d = parseFloat(el.style.animationDelay || 0) * 1000 || 0;
+    setTimeout(() => {
+      el.style.transition = 'opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1),filter 1s cubic-bezier(.16,1,.3,1)';
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+      el.style.filter = 'none';
+    }, 60 + d);
+  });
+});
+
+// ----- scroll reveal -----
+const revealables = [...document.querySelectorAll('.reveal, .reveal-zoom, .stagger')];
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, { threshold: .18, rootMargin: '0px 0px -6% 0px' });
+revealables.forEach(el => io.observe(el));
+
+// stagger delays for chapter cards
+document.querySelectorAll('.chapters .chapter').forEach((c, i) => c.style.transitionDelay = (i * 0.09) + 's');
+
+// apply incremental stagger to immediate children the moment parent reveals
+const observer2 = new MutationObserver(muts => {
+  muts.forEach(m => {
+    if (m.attributeName === 'class' && m.target.classList.contains('stagger') && m.target.classList.contains('in')) {
+      [...m.target.children].forEach((child, i) => child.style.transitionDelay = (i * 0.08) + 's');
+      observer2.takeRecords();
+    }
+  });
+});
+document.querySelectorAll('.stagger').forEach(el => observer2.observe(el, { attributes: true, attributeFilter: ['class'] }));
+
+// ----- FAQ accordion -----
+document.querySelectorAll('.fq').forEach(fq => {
+  const btn = fq.querySelector('.fq-q');
+  const panel = fq.querySelector('.fq-a');
+  btn.addEventListener('click', () => {
+    const open = fq.classList.contains('open');
+    // close others for a calm, single-open feel
+    document.querySelectorAll('.fq.open').forEach(o => {
+      if (o !== fq) { o.classList.remove('open'); o.querySelector('.fq-a').style.maxHeight = '0'; }
+    });
+    if (open) { fq.classList.remove('open'); panel.style.maxHeight = '0'; }
+    else { fq.classList.add('open'); panel.style.maxHeight = panel.scrollHeight + 'px'; }
+  });
+});
+</script>
+</body>
+</html>
