@@ -68,6 +68,14 @@ main{position:relative;z-index:2}
 .header .logo{position:absolute;left:50%;transform:translateX(-50%);font:700 15px/1 'Oswald',sans-serif;letter-spacing:.34em;color:var(--gold-bright);text-decoration:none;transition:letter-spacing .5s var(--ease-out)}
 .header .logo:hover{letter-spacing:.42em}
 .header .right{margin-left:auto;display:flex;gap:8px}
+
+/* menu dropdown */
+.menu-panel{position:absolute;top:calc(100% + 1px);left:10px;min-width:238px;background:linear-gradient(180deg,#14161f,var(--ink-3));border:1px solid var(--gold-dim);border-radius:6px;padding:8px;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-10px);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),visibility 0s linear .35s;z-index:60;box-shadow:0 18px 44px rgba(0,0,0,.55)}
+.menu-panel.open{opacity:1;visibility:visible;pointer-events:auto;transform:none;transition:opacity .35s var(--ease-out),transform .35s var(--ease-out),visibility 0s}
+.menu-panel a{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;font:600 11px/1 'Inter',sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--text);text-decoration:none;border-radius:4px;transition:color .25s,background .25s}
+.menu-panel a:hover,.menu-panel a:focus-visible{color:var(--gold-bright);background:rgba(236,199,111,.07);outline:none}
+.menu-panel a small{font-size:8.5px;letter-spacing:.18em;color:var(--text-dim);border:1px solid var(--line);border-radius:99px;padding:3px 8px}
+.menu-btn[aria-expanded="true"]{color:var(--gold-bright)}
 .header svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 
 /* ---------- hero ---------- */
@@ -256,9 +264,15 @@ body{touch-action:manipulation}
 </div>
 
 <header class="header">
-  <button class="menu-btn" aria-label="Menu">
+  <button class="menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="site-menu">
     <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h12"/></svg>
   </button>
+  <nav class="menu-panel" id="site-menu" aria-label="Site pages">
+    <a href="#top">The Book</a>
+    <a href="refund.html">Refund Policy</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="#" title="Coming soon">Terms <small>Soon</small></a>
+  </nav>
   <a class="logo" href="#top">THE GILDED CODE</a>
   <div class="right">
     <button class="icn hide-sm" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button>
@@ -435,6 +449,20 @@ const observer2 = new MutationObserver(muts => {
   });
 });
 document.querySelectorAll('.stagger').forEach(el => observer2.observe(el, { attributes: true, attributeFilter: ['class'] }));
+
+// ----- menu dropdown -----
+const menuBtn = document.querySelector('.menu-btn');
+const menuPanel = document.querySelector('.menu-panel');
+const closeMenu = () => { menuPanel.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); };
+menuBtn.addEventListener('click', () => {
+  const open = menuPanel.classList.toggle('open');
+  menuBtn.setAttribute('aria-expanded', String(open));
+});
+document.addEventListener('click', e => {
+  if (menuPanel.classList.contains('open') && !menuPanel.contains(e.target) && !menuBtn.contains(e.target)) closeMenu();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+menuPanel.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 
 // ----- FAQ accordion -----
 document.querySelectorAll('.fq').forEach(fq => {
