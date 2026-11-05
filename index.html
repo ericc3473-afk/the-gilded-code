@@ -187,6 +187,38 @@ section{padding:96px 24px}
 
 html{-webkit-text-size-adjust:100%}
 body{touch-action:manipulation}
+
+/* ---------- newsletter popup ---------- */
+.nl-overlay{position:fixed;inset:0;z-index:200;background:rgba(6,4,9,.78);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:22px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .45s var(--ease-out),visibility 0s linear .45s}
+.nl-overlay.open{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .45s var(--ease-out),visibility 0s}
+.nl-card{position:relative;width:min(470px,100%);background:linear-gradient(180deg,#14161f,var(--ink-3));border:1px solid var(--gold-dim);border-radius:8px;padding:44px 36px 36px;text-align:center;box-shadow:0 40px 90px rgba(0,0,0,.6);transform:translateY(26px) scale(.97);transition:transform .5s var(--ease-out)}
+.nl-overlay.open .nl-card{transform:none}
+.nl-card::before{content:'';position:absolute;inset:-1px;border-radius:8px;pointer-events:none;background:radial-gradient(320px 190px at 50% -12%,rgba(154,29,46,.5),transparent 70%)}
+.nl-x{position:absolute;top:10px;right:10px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;background:none;border:0;color:var(--text-dim);cursor:pointer;transition:color .3s;z-index:2}
+.nl-x:hover{color:var(--gold-bright)}
+.nl-kicker{font:600 10px/1 'Inter',sans-serif;letter-spacing:.34em;color:var(--gold);text-transform:uppercase}
+.nl-title{font:700 clamp(26px,4.6vw,32px)/1.15 'Oswald',sans-serif;color:var(--text-bright);letter-spacing:.02em;margin:14px 0 12px}
+.nl-copy{font-size:14.5px;line-height:1.7;color:var(--text);max-width:340px;margin:0 auto 22px}
+.nl-offer{font:italic 500 15.5px/1.5 'Playfair Display',serif;color:var(--gold-bright);margin:0 auto 26px;max-width:330px}
+.nl-form{display:flex;gap:10px;max-width:360px;margin:0 auto}
+.nl-form input{flex:1;min-width:0;background:#0d0c12;border:1px solid #3a3342;border-radius:2px;color:var(--text-bright);font:400 14.5px 'Inter',sans-serif;padding:14px 14px;transition:border-color .3s,box-shadow .3s}
+.nl-form input::placeholder{color:#5d5566}
+.nl-form input:focus{outline:none;border-color:var(--gold-dim);box-shadow:0 0 0 3px rgba(236,199,111,.12)}
+.nl-form button{background:linear-gradient(180deg,#fdf0bd,var(--gold-bright) 38%,var(--gold) 70%,#c99b3f);color:#231503;font:700 10.5px 'Inter',sans-serif;letter-spacing:.16em;text-transform:uppercase;padding:0 18px;border:0;border-radius:2px;cursor:pointer;white-space:nowrap;transition:transform .35s var(--ease-out),box-shadow .35s var(--ease-out);box-shadow:0 12px 30px rgba(236,199,111,.2)}
+.nl-form button:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(236,199,111,.34)}
+.nl-note{font-size:11px;color:var(--text-dim);margin-top:14px;letter-spacing:.04em}
+.nl-err{font-size:12.5px;color:#f3a0ab;margin-top:12px;display:none}
+.nl-err.show{display:block}
+/* success state */
+.nl-done{display:none}
+.nl-card.done .nl-state-1{display:none}
+.nl-card.done .nl-done{display:block}
+.nl-code{display:inline-block;font:700 16px/1 'Inter',sans-serif;letter-spacing:.22em;color:#fdf3cf;background:radial-gradient(circle at 30% 25%,#b52a3d,#9a1d2e 60%,#6d0f1e);border:1px solid rgba(249,228,166,.5);border-radius:4px;padding:14px 22px;margin:20px 0 14px;box-shadow:0 10px 26px rgba(154,29,46,.4)}
+@media(max-width:480px){
+  .nl-card{padding:40px 24px 30px}
+  .nl-form{flex-direction:column}
+  .nl-form button{padding:15px 18px}
+}
 .header button,.btn,.fq-q,.anchor-link,.dr{touch-action:manipulation;-webkit-tap-highlight-color:rgba(236,199,111,.14)}
 
 /* ---------- responsive ---------- */
@@ -304,7 +336,7 @@ body{touch-action:manipulation}
       </div>
       <div class="buy-card">
         <span class="sale-badge" aria-hidden="true"><b>10%</b><i>Off Sale</i></span>
-        <div class="price-row"><span class="price">$22.49</span><del class="was">$24.99</del><span class="cur">USD</span></div>
+        <div class="price-row"><span class="price">$27.99</span><del class="was">$31.10</del><span class="cur">USD</span></div>
         <div class="format">Introductory Sale &nbsp;·&nbsp; PDF eBook</div>
         <a class="btn" href="#" title="Checkout coming soon">Get Instant Access</a>
       </div>
@@ -408,6 +440,36 @@ body{touch-action:manipulation}
   <span><a href="index.html">THE BOOK</a> &nbsp;·&nbsp; <a href="refund.html">REFUNDS</a> &nbsp;·&nbsp; <a href="privacy.html">PRIVACY</a> &nbsp;·&nbsp; <a href="contact.html">CONTACT</a> &nbsp;·&nbsp; <a href="#">TERMS</a></span>
 </footer>
 
+<!-- NOTE: newsletter form delivers through formsubmit.co AJAX to the placeholder address info@your-domain.com;
+     swap for your real address when you share it (same email used by contact.html) -->
+
+<div class="nl-overlay" id="nl" role="dialog" aria-modal="true" aria-labelledby="nl-title" aria-hidden="true">
+  <div class="nl-card" id="nl-card">
+    <button class="nl-x" aria-label="Close">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+    <div class="nl-state-1">
+      <div class="nl-kicker">The Weekly Letter</div>
+      <h2 class="nl-title" id="nl-title">One quiet letter, every week</h2>
+      <p class="nl-copy">The patterns behind money, moves nobody announces, and reading people the way insiders do. Sent once a week, free to join, easy to leave.</p>
+      <p class="nl-offer">Add your email to join, and a 5% discount on The Gilded Code will be waiting for you at checkout.</p>
+      <form class="nl-form" id="nl-form" novalidate>
+        <input id="nl-email" name="email" type="email" placeholder="Your email" autocomplete="email" required>
+        <button type="submit">Claim 5% Off</button>
+      </form>
+      <p class="nl-err" id="nl-err">That email doesn't look right. Mind checking it?</p>
+      <p class="nl-note">One email a week. No noise. Unsubscribe with a click.</p>
+    </div>
+    <div class="nl-done">
+      <div class="nl-kicker">You're In</div>
+      <h2 class="nl-title">The first letter is on its way</h2>
+      <p class="nl-copy">Your discount code, enter it at checkout to take 5% off:</p>
+      <span class="nl-code">WELCOME5</span>
+      <p class="nl-note">Saved. You won't see this window on your next visit.</p>
+    </div>
+  </div>
+</div>
+
 <script>
 // ----- hero entrance -----
 window.addEventListener('load', () => {
@@ -476,6 +538,58 @@ document.querySelectorAll('.fq').forEach(fq => {
     else { fq.classList.add('open'); panel.style.maxHeight = panel.scrollHeight + 'px'; }
   });
 });
+// ----- newsletter popup -----
+const nl = document.getElementById('nl');
+const nlCard = document.getElementById('nl-card');
+const nlForm = document.getElementById('nl-form');
+const nlEmail = document.getElementById('nl-email');
+const nlErr = document.getElementById('nl-err');
+const NL_KEY = 'nl-state';
+const MONTH = 30 * 24 * 60 * 60 * 1000;
+const nlState = (() => { try { return JSON.parse(localStorage.getItem(NL_KEY)) || {}; } catch (e) { return {}; } })();
+const nlSave = s => { try { localStorage.setItem(NL_KEY, JSON.stringify(s)); } catch (e) {} };
+function nlCloseRD(kind) {
+  nl.classList.remove('open');
+  nl.setAttribute('aria-hidden', 'true');
+  if (kind === 'join') nlSave({ done: true, at: Date.now() });
+  else if (!nlState.done) nlSave({ dismissedAt: Date.now() });
+}
+function nlOpen() {
+  nl.classList.add('open');
+  nl.setAttribute('aria-hidden', 'false');
+  setTimeout(() => nlEmail.focus(), 550);
+}
+if (!nlState.done && (!nlState.dismissedAt || Date.now() - nlState.dismissedAt > MONTH)) {
+  setTimeout(nlOpen, 7000);
+}
+document.querySelector('.nl-x').addEventListener('click', () => nlCloseRD('dismiss'));
+nl.addEventListener('click', e => { if (e.target === nl) nlCloseRD('dismiss'); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && nl.classList.contains('open')) nlCloseRD('dismiss'); });
+nlForm.addEventListener('submit', async e => {
+  e.preventDefault();
+  const email = nlEmail.value.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { nlErr.classList.add('show'); return; }
+  nlErr.classList.remove('show');
+  const btn = nlForm.querySelector('button');
+  btn.disabled = true; btn.style.opacity = '.6'; btn.textContent = 'Sending';
+  try {
+    const resp = await fetch('https://formsubmit.co/ajax/info@your-domain.com', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ _subject: 'Newsletter signup (5% code)', email, note: 'Session signup from the site popup' })
+    });
+    const data = await resp.json().catch(() => ({}));
+    if (data && (data.success === 'false' || data.success === false)) throw new Error('rejected');
+    nlState.done = true; nlSave({ done: true, at: Date.now() });
+    nlCard.classList.add('done');
+    btn.disabled = false; btn.style.opacity = ''; btn.textContent = 'Claim 5% Off';
+  } catch (err) {
+    nlErr.textContent = 'The connection dropped. One more try?';
+    nlErr.classList.add('show');
+    btn.disabled = false; btn.style.opacity = ''; btn.textContent = 'Claim 5% Off';
+  }
+});
+
 </script>
 </body>
 </html>
