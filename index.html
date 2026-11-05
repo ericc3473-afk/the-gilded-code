@@ -63,7 +63,7 @@ main{position:relative;z-index:2}
 
 /* ---------- header ---------- */
 .header{display:flex;align-items:center;padding:14px 26px;border-bottom:1px solid var(--line);background:rgba(9,8,12,.72);backdrop-filter:blur(12px);position:sticky;top:0;z-index:5}
-.header .menu-btn,.header .icn{display:flex;align-items:center;justify-content:center;width:34px;height:34px;color:var(--text);cursor:pointer;transition:color .3s}
+.header .menu-btn,.header .icn{display:flex;align-items:center;justify-content:center;width:34px;height:34px;color:var(--text);cursor:pointer;transition:color .3s;background:none;border:0;padding:0;font:inherit}
 .header .menu-btn:hover,.header .icn:hover{color:var(--gold-bright)}
 .header .logo{position:absolute;left:50%;transform:translateX(-50%);font:700 15px/1 'Oswald',sans-serif;letter-spacing:.34em;color:var(--gold-bright);text-decoration:none;transition:letter-spacing .5s var(--ease-out)}
 .header .logo:hover{letter-spacing:.42em}
@@ -133,7 +133,7 @@ section{padding:96px 24px}
 .chapter{background:linear-gradient(180deg,#151721,#12141c);border:1px solid var(--line);border-top:1px solid rgba(236,199,111,.55);border-radius:4px;padding:26px 20px;text-align:left;min-height:190px;transition:transform .45s var(--ease-out),border-color .45s,box-shadow .45s}
 .chapter:hover{transform:translateY(-8px);border-color:var(--gold-dim);box-shadow:0 24px 50px rgba(0,0,0,.45)}
 .chapter .num{font:italic 500 26px 'Playfair Display',serif;color:#c22b3e}
-.chapter h4{font:700 14px 'Oswald',sans-serif;letter-spacing:.16em;color:var(--gold-bright);margin:14px 0 10px;text-transform:uppercase}
+.chapter h3{font:700 14px 'Oswald',sans-serif;letter-spacing:.16em;color:var(--gold-bright);margin:14px 0 10px;text-transform:uppercase}
 .chapter p{font-size:13px;color:var(--text-dim)}
 .quote{position:relative;max-width:660px;margin:64px auto 0;padding:10px 34px}
 .quote .q{font:italic 500 clamp(18px,2.6vw,24px)/1.5 'Playfair Display',serif;color:var(--text-bright)}
@@ -174,9 +174,13 @@ section{padding:96px 24px}
 .closing .tag{font:italic 500 17px 'Playfair Display',serif;color:var(--text-dim);margin:22px 0 34px}
 
 /* ---------- footer ---------- */
-.footer{padding:24px 30px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;font-size:10.5px;color:#6b6272;letter-spacing:.1em}
-.footer a{color:#6b6272;text-decoration:none;transition:color .3s}
+.footer{padding:24px 30px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;font-size:10.5px;color:#9b91a4;letter-spacing:.1em}
+.footer a{color:#9b91a4;text-decoration:none;transition:color .3s}
 .footer a:hover{color:var(--gold-bright)}
+
+html{-webkit-text-size-adjust:100%}
+body{touch-action:manipulation}
+.header button,.btn,.fq-q,.anchor-link,.dr{touch-action:manipulation;-webkit-tap-highlight-color:rgba(236,199,111,.14)}
 
 /* ---------- responsive ---------- */
 @media(max-width:900px){
@@ -184,12 +188,54 @@ section{padding:96px 24px}
   .chapters .chapter:nth-child(4){grid-column:1/-1}
 }
 @media(max-width:680px){
-  section{padding:70px 20px}
-  .hero-bookrow{flex-direction:column;gap:44px}
-  .buy-card{width:min(340px,100%)}
-  .chapters{grid-template-columns:1fr}
+  section{padding:64px 20px}
+  .header{padding:12px 18px}
+  .header .menu-btn,.header .icn{width:40px;height:40px}
+  .header .logo{font-size:12px;letter-spacing:.2em}
+  .hero{padding:44px 18px 54px}
+  .hero-bookrow{flex-direction:column;gap:42px}
+  .buy-card{width:min(360px,100%)}
+  .buy-card .btn{display:block;text-align:center}
+  .trust{gap:14px 22px;font-size:11.5px}
+  .chapters{grid-template-columns:1fr;gap:10px}
   .chapters .chapter{min-height:0}
-  .header .logo{letter-spacing:.22em}
+  .chapter{padding:22px 18px}
+  .quote{padding:6px 10px}
+  .fq-q{padding:18px 2px}
+  .discover .dr{padding:16px 2px}
+  .footer{flex-direction:column;text-align:center;gap:6px;margin-top:0}
+}
+@media(max-width:480px){
+  section{padding:52px 18px}
+  .hero{padding:36px 14px 46px}
+  .header{padding:10px 12px}
+  .header .logo{font-size:10.5px;letter-spacing:.14em}
+  .header .menu-btn,.header .icn{width:42px;height:42px}
+  .header .hide-sm{display:none}
+  .hero-title{font-size:46px}
+  .hero-sub{font-size:22px}
+  .hero-copy{font-size:15px}
+  .book{width:176px;height:254px;padding:18px 12px}
+  .book .bt{font-size:26px}
+  .book .bs{font-size:11px}
+  .badge{width:72px;height:72px;top:-14px;right:-14px;font-size:9px}
+  .badge i{font-size:10.5px}
+  .buy-card{padding:20px 16px}
+  .buy-card .price{font-size:24px}
+  .btn{padding:16px 20px;font-size:11px}
+  .chapters{gap:9px}
+  .chapter{padding:19px 15px}
+  .chapter .num{font-size:22px}
+  .chapter h3{font-size:13px}
+  .chapter p{font-size:12.5px}
+  .quote .q{line-height:1.55}
+  .dr .n{font-size:17px;min-width:30px}
+  .dr p{font-size:14px}
+  .fq-q{font-size:14px}
+  .fq-a p{padding-right:6px}
+  .discover .moral{font-size:15px}
+  .closing{padding:64px 16px}
+  .footer{padding:22px 18px}
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
@@ -210,14 +256,14 @@ section{padding:96px 24px}
 </div>
 
 <header class="header">
-  <span class="menu-btn" aria-label="Menu">
+  <button class="menu-btn" aria-label="Menu">
     <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h12"/></svg>
-  </span>
+  </button>
   <a class="logo" href="#top">THE GILDED CODE</a>
   <div class="right">
-    <span class="icn" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
-    <span class="icn" aria-label="Account"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></span>
-    <span class="icn" aria-label="Cart"><svg viewBox="0 0 24 24"><path d="M6 7h12l-1.2 12H7.2L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></span>
+    <button class="icn hide-sm" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button>
+    <button class="icn hide-sm" aria-label="Account"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></button>
+    <button class="icn" aria-label="Cart"><svg viewBox="0 0 24 24"><path d="M6 7h12l-1.2 12H7.2L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></button>
   </div>
 </header>
 
@@ -268,10 +314,10 @@ section{padding:96px 24px}
       status and opportunity.
     </p>
     <div class="chapters stagger">
-      <div class="chapter"><div class="num">I</div><h4>The Pattern</h4><p>The recurring patterns behind how wealth is built, protected, and passed on.</p></div>
-      <div class="chapter"><div class="num">II</div><h4>The Quiet Moves</h4><p>Why the most important moves are the ones nobody announces.</p></div>
-      <div class="chapter"><div class="num">III</div><h4>Reading Rooms</h4><p>How to read people, rooms and situations the way insiders do.</p></div>
-      <div class="chapter"><div class="num">IV</div><h4>The Rise</h4><p>The quiet habits that separate those who rise from those who stay in place.</p></div>
+      <div class="chapter"><div class="num">I</div><h3>The Pattern</h3><p>The recurring patterns behind how wealth is built, protected, and passed on.</p></div>
+      <div class="chapter"><div class="num">II</div><h3>The Quiet Moves</h3><p>Why the most important moves are the ones nobody announces.</p></div>
+      <div class="chapter"><div class="num">III</div><h3>Reading Rooms</h3><p>How to read people, rooms and situations the way insiders do.</p></div>
+      <div class="chapter"><div class="num">IV</div><h3>The Rise</h3><p>The quiet habits that separate those who rise from those who stay in place.</p></div>
     </div>
     <div class="quote reveal">
       <div class="q">"Most people spend their lives circling what they were never taught to see."</div>
