@@ -89,8 +89,14 @@ main{position:relative;z-index:2}
 .hero-copy{font-size:15.5px;color:var(--text);max-width:590px;margin:24px auto 0}
 .hero-copy b{color:var(--text-bright);font-weight:600}
 .hero-bookrow{display:flex;align-items:center;justify-content:center;gap:clamp(28px,5vw,56px);margin:48px 0 8px;flex-wrap:wrap}
-.buy-card{width:250px;padding:24px 22px;background:linear-gradient(180deg,#14161f,#12141c);border:1px solid var(--gold-dim);border-radius:6px;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.buy-card{width:250px;padding:24px 22px;background:linear-gradient(180deg,#14161f,#12141c);border:1px solid var(--gold-dim);border-radius:6px;box-shadow:0 24px 60px rgba(0,0,0,.5);position:relative}
+.sale-badge{position:absolute;top:-16px;right:-14px;width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 32% 26%,#b52a3d,#9a1d2e 55%,#6d0f1e);border:1px solid rgba(249,228,166,.5);box-shadow:0 10px 26px rgba(154,29,46,.45);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transform:rotate(9deg)}
+.sale-badge b{font:700 16px/1 'Instrument Sans',sans-serif;color:#fdf3cf;letter-spacing:.01em}
+.sale-badge i{font-style:normal;font:600 7px/1 'Inter',sans-serif;letter-spacing:.24em;color:#f6e7c1;text-transform:uppercase}
+.buy-card .price-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-top:34px}
 .buy-card .price{font:700 26px 'Inter',sans-serif;color:#fff;letter-spacing:.02em}
+.buy-card .was{font:600 15px 'Inter',sans-serif;color:var(--text-dim);text-decoration:line-through;text-decoration-color:rgba(236,199,111,.65);text-decoration-thickness:2px}
+.buy-card .cur{font:600 9.5px 'Inter',sans-serif;letter-spacing:.18em;color:var(--text-dim)}
 .buy-card .format{font:600 9.5px 'Inter',sans-serif;letter-spacing:.2em;color:var(--text-dim);margin:6px 0 18px;text-transform:uppercase}
 .trust{display:flex;justify-content:center;gap:26px;flex-wrap:wrap;font-size:12px;color:var(--text-dim);margin-top:36px;padding-top:18px;border-top:1px solid rgba(236,199,111,.15);max-width:640px;margin-left:auto;margin-right:auto}
 .trust span{display:flex;align-items:center;gap:7px}
@@ -122,13 +128,6 @@ main{position:relative;z-index:2}
 .book .bs{font:italic 500 12px 'Playfair Display',serif;color:#f6e9c2;margin-top:9px;text-shadow:0 1px 10px rgba(0,0,0,.95),0 0 20px rgba(0,0,0,.6)}
 .book .rule{width:44px;height:1px;background:linear-gradient(90deg,transparent,rgba(249,228,166,.85),transparent);margin:12px auto 0}
 .book .ba{margin-top:auto;font:600 10px 'Inter',sans-serif;letter-spacing:.34em;color:#fdf3cf;text-shadow:0 1px 10px rgba(0,0,0,.95),0 0 20px rgba(0,0,0,.6)}
-.badge{position:absolute;top:-20px;right:-30px;width:88px;height:88px;border-radius:50%;
-  background:radial-gradient(circle at 35% 30%,#d23449,#7d1224);
-  box-shadow:0 12px 28px rgba(164,31,43,.55),inset 0 0 0 2px rgba(249,228,166,.4);
-  color:#f8ecd0;font:600 10px/1.35 'Inter',sans-serif;display:flex;align-items:center;justify-content:center;text-align:center;transform:rotate(10deg);animation:badgepulse 3.2s ease-in-out infinite}
-.badge i{font-style:italic;font-family:'Playfair Display',serif;font-size:12px}
-@keyframes badgepulse{0%,100%{transform:rotate(10deg) scale(1)}50%{transform:rotate(10deg) scale(1.06)}}
-
 /* ---------- section commons ---------- */
 section{padding:96px 24px}
 .section-label{font:600 11px/1 'Inter',sans-serif;letter-spacing:.34em;color:var(--gold);text-transform:uppercase;text-align:center}
@@ -226,8 +225,6 @@ body{touch-action:manipulation}
   .book{width:176px;height:254px;padding:18px 12px}
   .book .bt{font-size:26px}
   .book .bs{font-size:11px}
-  .badge{width:72px;height:72px;top:-14px;right:-14px;font-size:9px}
-  .badge i{font-size:10.5px}
   .buy-card{padding:20px 16px}
   .buy-card .price{font-size:24px}
   .btn{padding:16px 20px;font-size:11px}
@@ -271,6 +268,7 @@ body{touch-action:manipulation}
     <a href="#top">The Book</a>
     <a href="refund.html">Refund Policy</a>
     <a href="privacy.html">Privacy Policy</a>
+    <a href="contact.html">Contact</a>
     <a href="#" title="Coming soon">Terms <small>Soon</small></a>
   </nav>
   <a class="logo" href="#top">THE GILDED CODE</a>
@@ -303,11 +301,11 @@ body{touch-action:manipulation}
           <div class="rule"></div>
           <div class="ba">KAEL VARNOW</div>
         </div>
-        <div class="badge">NOW<br><i>Unsealed</i></div>
       </div>
       <div class="buy-card">
-        <div class="price">$—.–</div>
-        <div class="format">Price set at checkout &nbsp;·&nbsp; PDF eBook</div>
+        <span class="sale-badge" aria-hidden="true"><b>10%</b><i>Off Sale</i></span>
+        <div class="price-row"><span class="price">$22.49</span><del class="was">$24.99</del><span class="cur">USD</span></div>
+        <div class="format">Introductory Sale &nbsp;·&nbsp; PDF eBook</div>
         <a class="btn" href="#" title="Checkout coming soon">Get Instant Access</a>
       </div>
     </div>
@@ -407,7 +405,7 @@ body{touch-action:manipulation}
 
 <footer class="footer">
   <span>© THE GILDED CODE — ABUNDANCE BY DESIGN, BY KAEL VARNOW</span>
-  <span><a href="index.html">THE BOOK</a> &nbsp;·&nbsp; <a href="refund.html">REFUNDS</a> &nbsp;·&nbsp; <a href="privacy.html">PRIVACY</a> &nbsp;·&nbsp; <a href="#">TERMS</a></span>
+  <span><a href="index.html">THE BOOK</a> &nbsp;·&nbsp; <a href="refund.html">REFUNDS</a> &nbsp;·&nbsp; <a href="privacy.html">PRIVACY</a> &nbsp;·&nbsp; <a href="contact.html">CONTACT</a> &nbsp;·&nbsp; <a href="#">TERMS</a></span>
 </footer>
 
 <script>
