@@ -1,0 +1,147 @@
+/* Cover pages (front cover full-bleed). Inlined by build.mjs; the texture
+   URL resolves relative to book/build/tmp/, where the paged copy lives. */
+@page cover {
+  size: 152.4mm 228.6mm;
+  margin: 0;
+  @bottom-center { content: none; }
+}
+
+.cover-page {
+  page: cover;
+  position: relative;
+  width: 152.4mm;
+  height: 228.6mm;
+  break-after: page;
+  background: #0a0a0c url("../../assets/cover.png") no-repeat center / cover;
+  color: #d3ae4e;
+  font-family: Georgia, 'Times New Roman', serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 16mm;
+}
+
+.cover-frame {
+  position: absolute;
+  top: 7mm; left: 7mm; right: 7mm; bottom: 7mm;
+  border: 0.4mm solid rgba(211, 174, 78, 0.55);
+  pointer-events: none;
+}
+
+.cover-frame::after {
+  content: "";
+  position: absolute;
+  top: 1.4mm; left: 1.4mm; right: 1.4mm; bottom: 1.4mm;
+  border: 0.15mm solid rgba(211, 174, 78, 0.35);
+}
+
+.cover-eyebrow {
+  margin-top: 30mm;
+  font-size: 13.5pt;
+  letter-spacing: 0.38em;
+  text-indent: 0.38em; /* balance the trailing letter-space */
+  text-transform: uppercase;
+  color: #b9902f;
+}
+
+.cover-rule {
+  margin: 9mm 0 11mm 0;
+  width: 26mm;
+  height: 0;
+  border-top: 0.35mm solid rgba(211, 174, 78, 0.7);
+}
+
+.cover-title {
+  font-size: 44pt;
+  line-height: 1.12;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #dcb454;
+  text-shadow: 0 0.5mm 2mm rgba(0, 0, 0, 0.8);
+}
+
+.cover-sub {
+  margin-top: 11mm;
+  font-style: italic;
+  font-size: 16pt;
+  letter-spacing: 0.14em;
+  color: #cda53f;
+}
+
+.cover-author {
+  margin-top: auto; /* the rest of the flex column is centered above */
+  margin-bottom: 24mm;
+  font-size: 14.5pt;
+  letter-spacing: 0.42em;
+  text-indent: 0.42em;
+  text-transform: uppercase;
+  color: #d3ae4e;
+}
+
+/* Back cover: same texture, blurb set for reading */
+.backcover-page {
+  page: cover;
+  position: relative;
+  width: 152.4mm;
+  height: 228.6mm;
+  break-after: page;
+  background: #0a0a0c url("../../assets/cover.png") no-repeat center / cover;
+  color: #e8d9b0;
+  font-family: Georgia, 'Times New Roman', serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 22mm 18mm 18mm 18mm;
+  text-align: left;
+}
+
+.backcover-hook {
+  font-size: 12.5pt;
+  font-weight: bold;
+  line-height: 1.5;
+  color: #dcb454;
+  margin-bottom: 6mm;
+}
+
+.backcover-page p {
+  font-size: 10pt;
+  line-height: 1.55;
+  margin: 0 0 4mm 0;
+}
+
+.backcover-tag {
+  font-size: 10.5pt;
+  font-weight: bold;
+  color: #dcb454;
+  letter-spacing: 0.02em;
+}
+
+.backcover-laws {
+  color: #dcb454;
+  font-size: 10.5pt;
+  letter-spacing: 0.06em;
+}
+
+.backcover-source {
+  font-style: italic;
+  font-size: 9pt;
+  color: #bfa96f;
+  margin-top: 2mm;
+}
+
+.backcover-byline {
+  margin-top: 7mm;
+  font-size: 9.5pt;
+  color: #d3ae4e;
+}
+
+.backcover-byline strong {
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-size: 10pt;
+}
+

@@ -115,19 +115,11 @@ main{position:relative;z-index:2}
 .book-wrap{position:relative;display:inline-block;animation:float 7s ease-in-out infinite}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 .book{position:relative;width:200px;height:288px;border-radius:4px 12px 12px 4px;
-  background:
-    linear-gradient(180deg,rgba(5,4,7,.66) 0%,rgba(5,4,7,.16) 24%,rgba(5,4,7,.20) 52%,rgba(5,4,7,.24) 62%,rgba(4,3,6,.82) 100%),
-    url('book-cover.png') center / cover no-repeat #050406;
+  background:url('gilded-cover.png') center / cover no-repeat #050406;
   box-shadow:0 36px 70px rgba(0,0,0,.7),inset 0 0 0 1px rgba(249,228,166,.3);
   transform:perspective(950px) rotateY(-13deg) rotateX(2deg);
-  display:flex;flex-direction:column;align-items:center;text-align:center;padding:22px 14px;
   filter:drop-shadow(0 0 46px rgba(236,199,111,.28));}
 .book::before{content:'';position:absolute;inset:0 auto 0 0;width:15px;border-radius:4px 0 0 4px;background:linear-gradient(90deg,rgba(0,0,0,.9),rgba(20,10,4,.75) 60%,rgba(0,0,0,0))}
-.book .bk{font:italic 500 10px 'Playfair Display',serif;color:#fdf3cf;text-shadow:0 1px 10px rgba(0,0,0,.95),0 0 22px rgba(0,0,0,.6);letter-spacing:.06em}
-.book .bt{font:700 29px/1.08 'Oswald',sans-serif;letter-spacing:.05em;color:#f9e4a6;margin-top:12px;text-shadow:0 2px 14px rgba(0,0,0,.95),0 0 30px rgba(0,0,0,.55)}
-.book .bs{font:italic 500 12px 'Playfair Display',serif;color:#f6e9c2;margin-top:9px;text-shadow:0 1px 10px rgba(0,0,0,.95),0 0 20px rgba(0,0,0,.6)}
-.book .rule{width:44px;height:1px;background:linear-gradient(90deg,transparent,rgba(249,228,166,.85),transparent);margin:12px auto 0}
-.book .ba{margin-top:auto;font:600 10px 'Inter',sans-serif;letter-spacing:.34em;color:#fdf3cf;text-shadow:0 1px 10px rgba(0,0,0,.95),0 0 20px rgba(0,0,0,.6)}
 /* ---------- section commons ---------- */
 section{padding:96px 24px}
 .section-label{font:600 11px/1 'Inter',sans-serif;letter-spacing:.34em;color:var(--gold);text-transform:uppercase;text-align:center}
@@ -254,9 +246,7 @@ body{touch-action:manipulation}
   .hero-title{font-size:46px}
   .hero-sub{font-size:22px}
   .hero-copy{font-size:15px}
-  .book{width:176px;height:254px;padding:18px 12px}
-  .book .bt{font-size:26px}
-  .book .bs{font-size:11px}
+  .book{width:176px;height:254px}
   .buy-card{padding:20px 16px}
   .buy-card .price{font-size:24px}
   .btn{padding:16px 20px;font-size:11px}
@@ -326,13 +316,7 @@ body{touch-action:manipulation}
     </p>
     <div class="hero-bookrow" data-hero style="animation-delay:.55s">
       <div class="book-wrap">
-        <div class="book">
-          <div class="bk">The Pattern Behind</div>
-          <div class="bt">THE<br>GILDED<br>CODE</div>
-          <div class="bs">Abundance by Design</div>
-          <div class="rule"></div>
-          <div class="ba">KAEL VARNOW</div>
-        </div>
+        <div class="book" role="img" aria-label="The Gilded Code — front cover"></div>
       </div>
       <div class="buy-card">
         <span class="sale-badge" aria-hidden="true"><b>10%</b><i>Off Sale</i></span>

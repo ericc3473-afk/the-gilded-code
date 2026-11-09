@@ -1,0 +1,119 @@
+@page {
+  size: 152.4mm 228.6mm;
+  margin: 20mm 16mm 20mm 16mm;
+  @bottom-center {
+    content: counter(page);
+    font-family: Georgia, serif;
+    font-size: 9pt;
+    color: #6b5d3f;
+  }
+  @top-center {
+    content: string(chaptitle);
+    font-family: Georgia, serif;
+    font-size: 7.5pt;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #8a7b56;
+  }
+}
+body { font-family: Georgia, 'Times New Roman', serif; }
+.pagedjs_page { background: white; }
+section.dummy p { line-height: 1.6; }
+section.pb { break-before: page; }
+
+/* ---- assembled manuscript typography ---- */
+body { font-size: 12pt; line-height: 1.65; color: #241e15; }
+
+/* running-head source: chapter or part titles (grouped rule: Paged.js
+   drops earlier rules that set the same named string separately) */
+h1, .part-title { string-set: chaptitle content(text); }
+
+p { margin: 0 0 0.5em 0; }
+
+h1 {
+  font-size: 19pt;
+  line-height: 1.25;
+  margin: 0 0 2.5mm 0;
+  color: #2b2417;
+  padding-bottom: 2.5mm;
+  border-bottom: 0.3mm solid rgba(150, 116, 40, 0.45);
+}
+h2 { font-size: 13.5pt; margin: 0.9em 0 0.3em 0; color: #2b2417; }
+h3 { font-size: 12pt; margin: 0.9em 0 0.2em 0; color: #3a3223; }
+
+.kicker {
+  font-size: 9pt;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #8a6d28;
+  margin: 0 0 3.5mm 0;
+}
+
+blockquote {
+  border-left: 1mm solid #b9902f;
+  background: rgba(184, 141, 55, 0.08);
+  margin: 1em 0 0.9em 0;
+  padding: 0.55em 0.9em 0.55em 0.9em;
+}
+blockquote p { margin: 0 0 0.4em 0; }
+blockquote p:last-child { margin-bottom: 0; }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 9.5pt;
+  margin: 0.6em 0 1em 0;
+}
+th, td {
+  border-bottom: 0.2mm solid #cec19b;
+  padding: 2.5pt 4pt;
+  text-align: left;
+  vertical-align: top;
+}
+th { color: #6b5d3f; border-bottom-width: 0.5mm; }
+
+.part-divider {
+  break-before: page;
+  text-align: center;
+  padding-top: 82mm;
+}
+.part-label {
+  font-size: 11pt;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #8a6d28;
+  margin-bottom: 4mm;
+}
+.part-title {
+  font-size: 21pt;
+  font-weight: bold;
+  color: #2b2417;
+  margin: 0 0 3mm 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.part-sub { font-style: italic; font-size: 11.5pt; color: #5a4f38; }
+
+.titlepage { text-align: center; padding-top: 58mm; }
+.titlepage h1 {
+  font-size: 27pt;
+  letter-spacing: 0.08em;
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 5mm;
+}
+.titlepage h2 {
+  font-size: 14pt;
+  font-style: italic;
+  font-weight: normal;
+  margin-bottom: 3mm;
+}
+.titlepage h3 { font-size: 11.5pt; font-weight: normal; color: #5a4f38; }
+.titlepage h4 {
+  font-size: 12pt;
+  font-weight: normal;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin: 22mm 0 10mm 0;
+}
+.titlepage p { font-size: 10pt; color: #5a4f38; }
