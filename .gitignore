@@ -1,2 +1,16 @@
+# book build artifacts
 book/node_modules/
 book/build/tmp/
+
+# secrets — never commit
+.dev.vars
+.env
+.env.*
+checkout/.dev.vars
+checkout/.wrangler/
+
+# deps
+node_modules/
+
+# local test artifacts
+*.log

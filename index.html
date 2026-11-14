@@ -325,7 +325,7 @@ body{touch-action:manipulation}
         <span class="sale-badge" aria-hidden="true"><b>10%</b><i>Off Sale</i></span>
         <div class="price-row"><span class="price">$27.99</span><del class="was">$31.10</del><span class="cur">USD</span></div>
         <div class="format">Introductory Sale &nbsp;·&nbsp; PDF eBook</div>
-        <a class="btn" href="https://checkout.dodopayments.com/buy/pdt_0NrmfTqZmZ3jzWtPsHzbW?quantity=1">Get Instant Access</a>
+        <a class="btn js-buy" href="#" title="Secure checkout, right on this page">Get Instant Access</a>
       </div>
     </div>
     <div class="trust" data-hero style="animation-delay:.7s">
@@ -417,7 +417,7 @@ body{touch-action:manipulation}
   <section class="closing">
     <h2 class="big reveal">SOME PEOPLE SPEND A LIFETIME LOOKING.<br><span class="grad">A FEW LEARN HOW TO SEE.</span></h2>
     <div class="tag reveal" style="transition-delay:.12s">Crack the code. Design the life.</div>
-    <div class="reveal" style="transition-delay:.22s"><a class="btn" href="https://checkout.dodopayments.com/buy/pdt_0NrmfTqZmZ3jzWtPsHzbW?quantity=1">Get The Gilded Code</a></div>
+    <div class="reveal" style="transition-delay:.22s"><a class="btn js-buy" href="#" title="Secure checkout, right on this page">Get The Gilded Code</a></div>
   </section>
 
 </main>
@@ -457,6 +457,7 @@ body{touch-action:manipulation}
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/dodopayments-checkout@latest/dist/index.js"></script>
 <script>
 // ----- hero entrance -----
 window.addEventListener('load', () => {
@@ -567,7 +568,7 @@ nlForm.addEventListener('submit', async e => {
     });
     const data = await resp.json().catch(() => ({}));
     if (data && (data.success === 'false' || data.success === false)) throw new Error('rejected');
-    nlState.done = true; nlSave({ done: true, at: Date.now() });
+    nlState.done = true; nlState.email = email; nlSave({ done: true, at: Date.now(), email: email });
     nlCard.classList.add('done');
     btn.disabled = false; btn.style.opacity = ''; btn.textContent = 'Claim 5% Off';
   } catch (err) {
@@ -576,6 +577,66 @@ nlForm.addEventListener('submit', async e => {
     btn.disabled = false; btn.style.opacity = ''; btn.textContent = 'Claim 5% Off';
   }
 });
+
+// ----- Dodo Payments overlay checkout -----
+// Creates a session on our small backend, then opens checkout as a modal on this page.
+// The buyer never navigates away; on success Dodo redirects inside the modal to success.html.
+const CHECKOUT_API = 'https://api.kaelvarnow.com/api/create-checkout';
+
+const dp = () => window.DodoPaymentsCheckout && window.DodoPaymentsCheckout.DodoPayments;
+if (dp()) {
+  dp().Initialize({
+    mode: 'test', // flip to 'live' together with the backend mode at go-live
+    displayType: 'overlay',
+    onEvent: ev => {
+      if (ev.event_type === 'checkout.error') showBuyToast('Checkout hit a snag. Please try again.', true);
+    }
+  });
+}
+
+let buyToastTimer;
+const buyToast = document.createElement('div');
+buyToast.style.cssText = 'position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(10px);background:#14161f;border:1px solid rgba(236,199,111,.35);color:#b3abbd;font:500 13px Inter,sans-serif;padding:12px 18px;border-radius:4px;opacity:0;transition:opacity .4s,transform .4s;z-index:300;pointer-events:none;max-width:90vw;text-align:center;box-shadow:0 14px 36px rgba(0,0,0,.5)';
+document.body.appendChild(buyToast);
+function showBuyToast(msg, isErr) {
+  buyToast.textContent = msg;
+  buyToast.style.borderColor = isErr ? 'rgba(243,160,171,.6)' : 'rgba(236,199,111,.35)';
+  buyToast.style.opacity = '1';
+  buyToast.style.transform = 'translateX(-50%)';
+  clearTimeout(buyToastTimer);
+  buyToastTimer = setTimeout(() => {
+    buyToast.style.opacity = '0';
+    buyToast.style.transform = 'translateX(-50%) translateY(10px)';
+  }, 3800);
+}
+
+async function startCheckout(e) {
+  e.preventDefault();
+  const btn = e.currentTarget;
+  if (btn.dataset.busy) return;
+  btn.dataset.busy = '1';
+  const label = btn.textContent;
+  btn.textContent = 'Opening checkout\u2026';
+  try {
+    if (!dp()) throw new Error('sdk');
+    const r = await fetch(CHECKOUT_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ subscriber: !!(nlState && nlState.done), email: (nlState && nlState.email) || null })
+    });
+    const d = await r.json();
+    if (!d.checkout_url) throw new Error('session');
+    await dp().Checkout.open({ checkoutUrl: d.checkout_url });
+  } catch (err) {
+    if (err && err.message === 'sdk') showBuyToast('Secure checkout is connecting. Please try again in a moment.', true);
+    else if (err && err.message === 'session') showBuyToast('Checkout is not reachable right now. Please try again shortly.', true);
+    else showBuyToast('Checkout hit a snag. Please try again.', true);
+  } finally {
+    delete btn.dataset.busy;
+    btn.textContent = label;
+  }
+}
+document.querySelectorAll('.js-buy').forEach(b => b.addEventListener('click', startCheckout));
 
 </script>
 </body>

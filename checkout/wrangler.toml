@@ -1,0 +1,11 @@
+name = "gilded-checkout"
+main = "cloudflare-entry.js"
+compatibility_date = "2024-11-01"
+
+# Serve the API on the site's own domain (workers.dev is blocked by some ISPs).
+routes = [
+  { pattern = "api.kaelvarnow.com", custom_domain = true }
+]
+
+[vars]
+# DODO_API_KEY is NOT here. Set it as a secret:  npx wrangler secret put DODO_API_KEY

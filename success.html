@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You | The Gilded Code — Abundance by Design</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0f;
+  --ink-3:#12141c;
+  --line:#262230;
+  --gold:#ecc76f;
+  --gold-bright:#f9e4a6;
+  --gold-dim:rgba(236,199,111,.35);
+  --glow:#2a0e14;
+  --text:#b3abbd;
+  --text-dim:#827c8c;
+  --text-bright:#f5f2f6;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink);
+  color:var(--text);
+  font-family:'Inter',system-ui,sans-serif;
+  font-size:16px;
+  line-height:1.75;
+  overflow-x:hidden;
+  min-height:100vh;
+}
+body::before{
+  content:'';
+  position:fixed; inset:0;
+  pointer-events:none; z-index:0;
+  background:
+    radial-gradient(1300px 620px at 78% -6%, rgba(42,14,20,.66), transparent 62%),
+    radial-gradient(1100px 540px at 6% 96%, rgba(42,14,20,.42), transparent 60%);
+}
+.wrap{position:relative;z-index:2;max-width:640px;margin:0 auto;padding:72px 24px 80px;text-align:center}
+.mark{width:74px;height:74px;border-radius:50%;margin:0 auto 26px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 32% 26%,#b52a3d,#9a1d2e 55%,#6d0f1e);border:1px solid rgba(249,228,166,.5);box-shadow:0 12px 30px rgba(154,29,46,.4)}
+.mark svg{width:30px;height:30px;stroke:#fdf3cf;stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+h1{font:700 clamp(30px,5vw,44px)/1.1 'Oswald',sans-serif;color:var(--text-bright);letter-spacing:.02em;margin-bottom:14px}
+.lede{color:var(--text);max-width:440px;margin:0 auto 8px}
+.lede em{font:italic 500 1em 'Playfair Display',serif;color:var(--gold-bright)}
+.steps{list-style:none;max-width:420px;margin:26px auto 0;text-align:left}
+.steps li{position:relative;padding:12px 0 12px 40px;border-top:1px solid var(--line)}
+.steps li:first-child{border-top:0}
+.steps li::before{content:'·';position:absolute;left:14px;top:8px;color:var(--gold);font-weight:700;font-size:22px;line-height:1.4}
+.steps b{color:var(--text-bright);font-weight:600}
+.note{font-size:12.5px;color:var(--text-dim);margin-top:30px}
+.note a{color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold-dim)}
+.note a:hover{color:var(--gold-bright);border-color:var(--gold-bright)}
+.btn{display:inline-block;margin-top:34px;background:linear-gradient(180deg,#fdf0bd,var(--gold-bright) 38%,var(--gold) 70%,#c99b3f);color:#231503;font:700 12px 'Inter',sans-serif;letter-spacing:.2em;text-transform:uppercase;padding:16px 34px;border-radius:2px;text-decoration:none;box-shadow:0 14px 36px rgba(236,199,111,.22);transition:transform .35s var(--ease-out),box-shadow .35s var(--ease-out)}
+.btn:hover{transform:translateY(-3px);box-shadow:0 22px 48px rgba(236,199,111,.38)}
+@media(max-width:680px){.wrap{padding-top:48px}}
+</style>
+</head>
+<body>
+
+<main class="wrap">
+  <div class="mark" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><path d="M4 12.5 10 18 20 6"/></svg>
+  </div>
+  <h1>The code is yours.</h1>
+  <p class="lede">Your copy of <em>The Gilded Code</em> is on its way to your inbox, sent the moment your payment cleared.</p>
+  <ul class="steps">
+    <li><b>Check your email</b> for the receipt and your instant download link.</li>
+    <li><b>Download the PDF</b> and keep it on every device you read on.</li>
+    <li><b>Lose the email?</b> The download portal in that same email lets you re-download any time.</li>
+  </ul>
+  <p class="note" id="failNote" hidden>It looks like the payment didn't complete. Nothing was charged. You can close this and try again, or write to
+  <a href="mailto:info@your-domain.com">info@your-domain.com</a> and we'll sort it within 24 hours.</p>
+  <a class="btn" href="index.html">Back to the Book</a>
+  <p class="note">A quiet first letter lands in your inbox this week. If you joined the list, your <b style="color:var(--gold-bright)">WELCOME5</b> code is already applied at checkout on future orders.</p>
+</main>
+
+<script>
+// Dodo appends payment details to the return URL; surface a failure state if the status isn't success.
+const params = new URLSearchParams(location.search);
+const status = (params.get('status') || params.get('payment_status') || '').toLowerCase();
+if (status && !status.includes('success') && !status.includes('completed') && !status.includes('paid')) {
+  document.getElementById('failNote').hidden = false;
+  document.querySelector('.mark').style.opacity = '.35';
+  document.querySelector('h1').textContent = 'Payment not completed';
+  document.querySelector('.lede').textContent = 'No charge was made. You can return to the book and try checkout again whenever you like.';
+}
+</script>
+
+</body>
+</html>
