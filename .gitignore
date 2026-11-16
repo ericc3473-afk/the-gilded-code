@@ -4,6 +4,7 @@ book/build/tmp/
 
 # secrets — never commit
 .dev.vars
+.dev.vars.*
 .env
 .env.*
 checkout/.dev.vars

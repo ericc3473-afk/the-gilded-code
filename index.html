@@ -586,7 +586,7 @@ const CHECKOUT_API = 'https://api.kaelvarnow.com/api/create-checkout';
 const dp = () => window.DodoPaymentsCheckout && window.DodoPaymentsCheckout.DodoPayments;
 if (dp()) {
   dp().Initialize({
-    mode: 'test', // flip to 'live' together with the backend mode at go-live
+    mode: 'live', // matches the backend MODE in checkout/worker.js
     displayType: 'overlay',
     onEvent: ev => {
       if (ev.event_type === 'checkout.error') showBuyToast('Checkout hit a snag. Please try again.', true);

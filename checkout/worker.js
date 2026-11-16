@@ -3,7 +3,7 @@
 //  - local-server.mjs (local end-to-end testing)
 // The Dodo API key NEVER lives in this file; it is passed in as an argument.
 
-const MODE = 'test'; // flip to 'live' at go-live (along with the SDK mode and key)
+const MODE = 'live'; // flipped 2026-11-16: live payments enabled
 const API_BASE = MODE === 'live' ? 'https://live.dodopayments.com' : 'https://test.dodopayments.com';
 
 // Origins allowed to call this endpoint, mapped to their post-payment URLs.
@@ -15,7 +15,7 @@ const SITES = {
   'http://localhost:8604': { base: 'http://localhost:8604/' },
 };
 
-const PRODUCT_ID = 'pdt_0NrdZaVOZ6E7Z5ZiKZIzE';
+const PRODUCT_ID = 'pdt_0NrmfTqZmZ3jzWtPsHzbW';
 const SUBSCRIBER_DISCOUNT = 'WELCOME5';
 
 // Dark theme matching the site (warm black, gold, Instrument Sans).
