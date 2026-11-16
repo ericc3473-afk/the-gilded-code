@@ -619,13 +619,22 @@ async function startCheckout(e) {
   btn.textContent = 'Opening checkout\u2026';
   try {
     if (!dp()) throw new Error('sdk');
-    const r = await fetch(CHECKOUT_API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ subscriber: !!(nlState && nlState.done), email: (nlState && nlState.email) || null })
-    });
-    const d = await r.json();
-    if (!d.checkout_url) throw new Error('session');
+    // Create the session with automatic retries: a momentary Dodo hiccup or
+    // deploy window should never surface as an error to a buyer.
+    let d = null;
+    for (let attempt = 0; attempt < 3; attempt++) {
+      if (attempt > 0) await new Promise(res => setTimeout(res, 1200 * attempt));
+      const r = await fetch(CHECKOUT_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ subscriber: !!(nlState && nlState.done), email: (nlState && nlState.email) || null })
+      });
+      d = await r.json().catch(() => null);
+      if (d && d.checkout_url) break;
+      if (d && d.detail) console.warn('checkout api:', r.status, d.detail);
+      d = null;
+    }
+    if (!d) throw new Error('session');
     await dp().Checkout.open({ checkoutUrl: d.checkout_url });
   } catch (err) {
     if (err && err.message === 'sdk') showBuyToast('Secure checkout is connecting. Please try again in a moment.', true);
