@@ -9,7 +9,11 @@ const API_BASE = MODE === 'live' ? 'https://live.dodopayments.com' : 'https://te
 // Origins allowed to call this endpoint, mapped to their post-payment URLs.
 const SITES = {
   'https://www.kaelvarnow.com': { base: 'https://www.kaelvarnow.com/' },
-  'https://kaelvarnow.com': { base: 'https://kaelvarnow.com/' },
+  'https://kaelvarnow.com': { base: 'https://www.kaelvarnow.com/' },
+  // Some visitors reach the site over plain http (before HTTPS enforcement); serve them too,
+  // but send them back to the https URLs after payment.
+  'http://www.kaelvarnow.com': { base: 'https://www.kaelvarnow.com/' },
+  'http://kaelvarnow.com': { base: 'https://www.kaelvarnow.com/' },
   'https://ericc3473-afk.github.io': { base: 'https://ericc3473-afk.github.io/the-gilded-code/' },
   'http://127.0.0.1:8604': { base: 'http://127.0.0.1:8604/' },
   'http://localhost:8604': { base: 'http://localhost:8604/' },
@@ -79,9 +83,11 @@ function corsHeaders(origin) {
 // Returns a Response (JSON: {checkout_url} or {error}).
 export async function createCheckoutResponse(request, apiKey) {
   const origin = request.headers.get('origin') || '';
+  console.log('request: origin=' + origin);
   const site = SITES[origin];
   if (!site) {
-    return Response.json({ error: 'Forbidden' }, { status: 403, headers: corsHeaders(origin) });
+    console.log('REJECTED origin not in allowlist');
+    return Response.json({ error: 'Forbidden', origin }, { status: 403, headers: corsHeaders(origin) });
   }
 
   let info = { subscriber: false, email: null };
@@ -92,6 +98,7 @@ export async function createCheckoutResponse(request, apiKey) {
       email: body && typeof body.email === 'string' ? body.email : null,
     };
   } catch (e) { /* empty body is fine */ }
+  console.log('request: subscriber=' + info.subscriber + ' email=' + (info.email ? info.email.replace(/^(.).*(@.*)$/, '$1***$2') : 'null'));
 
   const session = {
     product_cart: [{ product_id: PRODUCT_ID, quantity: 1 }],
@@ -114,12 +121,14 @@ export async function createCheckoutResponse(request, apiKey) {
   // If the discount code isn't set up (or expired), retry once without it so checkout still works.
   // Dodo reports unknown discount codes as 404; invalid/expired ones as 422.
   if ((resp.status === 422 || resp.status === 404) && session.discount_codes) {
+    console.log('discount rejected (' + resp.status + '), retrying without it');
     delete session.discount_codes;
     resp = await dodoCreate(session, apiKey);
   }
 
   if (!resp.ok) {
     const detail = await resp.text().catch(() => '');
+    console.log('DODO FAILED ' + resp.status + ': ' + detail.slice(0, 500));
     return Response.json({ error: 'Checkout session failed', detail: detail.slice(0, 300) }, { status: 502, headers: corsHeaders(origin) });
   }
   const data = await resp.json();
