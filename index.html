@@ -805,7 +805,7 @@ document.querySelectorAll('.js-buy').forEach(b => b.addEventListener('click', st
   function restart() {
     if (reduced) return;
     clearInterval(timer);
-    timer = setInterval(() => goTo(index + 1), 7000);
+    timer = setInterval(() => goTo(index + 1), 3000);
   }
   function userMove(i) { goTo(i); restart(); }
 
