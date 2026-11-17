@@ -150,6 +150,37 @@ section{padding:96px 24px}
 .author p{font-size:14.5px}
 .author p+p{margin-top:12px}
 
+/* ---------- testimonials ---------- */
+.testi-band{background:radial-gradient(860px 420px at 50% 0%,rgba(42,14,20,.5),transparent 70%)}
+.t-slider{position:relative;max-width:740px;margin:52px auto 0}
+.t-viewport{overflow:hidden;border-radius:4px;transition:height .65s var(--ease-out)}
+.t-track{display:flex;align-items:flex-start;transition:transform .65s var(--ease-out)}
+.t-slide{flex:0 0 100%;min-width:100%;padding:4px}
+.t-card{display:flex;flex-direction:column;background:linear-gradient(180deg,#151721,#12141c);border:1px solid var(--line);border-top:1px solid rgba(236,199,111,.55);border-radius:4px;padding:34px 38px 28px;box-shadow:0 24px 50px rgba(0,0,0,.35)}
+.t-card .q{font:italic 500 clamp(17px,2.2vw,20.5px)/1.62 'Playfair Display',serif;color:var(--text-bright);flex:1}
+.t-card .q b{font-style:normal;font-weight:600;color:var(--gold-bright)}
+.t-who{display:flex;align-items:center;gap:14px;margin-top:26px;padding-top:22px;border-top:1px solid var(--line)}
+.t-ava{flex:0 0 auto;width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 16px 'Instrument Sans',sans-serif;color:#231503;background:radial-gradient(circle at 32% 26%,#fdf0bd,var(--gold-bright) 40%,var(--gold) 72%,#c99b3f);box-shadow:0 8px 20px rgba(236,199,111,.25)}
+.t-name{font:600 14.5px 'Inter',sans-serif;color:var(--text-bright);display:flex;align-items:center;gap:7px}
+.t-name .vf{flex:0 0 auto;width:15px;height:15px}
+.t-sub{font-size:12px;color:var(--text-dim);margin-top:2px}
+.t-chip{margin-left:auto;display:flex;align-items:center;gap:7px;font:600 10.5px 'Inter',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);border:1px solid var(--line);border-radius:3px;padding:6px 11px;white-space:nowrap}
+.t-chip svg{width:12px;height:12px;fill:currentColor}
+.t-meta{font-size:12px;color:var(--text-dim);margin-top:8px;padding-left:60px}
+.t-meta .stars{color:#00b67a;letter-spacing:2px;font-size:12.5px}
+.t-nav{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:26px}
+.t-arrow{width:42px;height:42px;border-radius:50%;border:1px solid var(--gold-dim);background:none;color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .3s,color .3s,transform .35s var(--ease-out),border-color .3s}
+.t-arrow:hover{background:var(--gold);color:#231503;transform:translateY(-2px)}
+.t-arrow svg{width:17px;height:17px;stroke:currentColor;stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.t-dots{display:flex;gap:9px}
+.t-dot{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:var(--line);cursor:pointer;transition:background .35s,transform .35s}
+.t-dot.on{background:var(--gold);transform:scale(1.25)}
+@media(max-width:640px){
+  .t-card{padding:26px 22px 22px}
+  .t-meta{padding-left:0}
+  .t-chip{display:none}
+}
+
 /* ---------- discover ---------- */
 .discover{max-width:760px;margin:48px auto 0;text-align:left}
 .dr{display:flex;gap:18px;padding:18px 6px;border-bottom:1px solid var(--line);align-items:baseline;transition:background .35s,padding-left .35s var(--ease-out)}
@@ -366,6 +397,104 @@ body{touch-action:manipulation}
       build lasting wealth and power from those who spend their lives circling it.</p>
       <p>Once you can read the code, you can't unsee it. Headlines, deals, careers and
       conversations all start to look different.</p>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testi-band">
+    <div class="section-label reveal">From The Readers</div>
+    <h2 class="section-head reveal" style="transition-delay:.08s">WHAT EARLY READERS <em>are saying</em></h2>
+    <div class="t-slider reveal" style="transition-delay:.15s" id="tSlider">
+      <div class="t-viewport">
+        <div class="t-track" id="tTrack">
+
+          <div class="t-slide"><div class="t-card">
+            <p class="q">“The Gilded Code by Kael Varnow is a rare book — practical, thought-provoking, and makes you see power and wealth from a completely new angle.”</p>
+            <div class="t-who">
+              <div class="t-ava" aria-hidden="true">RM</div>
+              <div><div class="t-name">Rachel Monroe
+                <svg class="vf" viewBox="0 0 24 24" aria-label="verified"><circle cx="12" cy="12" r="11" fill="#1d9bf0"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div><div class="t-sub">@rachelmonroe</div></div>
+              <span class="t-chip"><svg viewBox="0 0 24 24"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L2.5 2h6.4l4.4 5.9L18.9 2zm-1.1 18h1.7L7.1 3.9H5.3L17.8 20z"/></svg>On X</span>
+            </div>
+            <div class="t-meta">Nov 15, 2026 · 3.6K likes · 198.4K views</div>
+          </div></div>
+
+          <div class="t-slide"><div class="t-card">
+            <p class="q">“Just finished The Gilded Code by Kael Varnow and wow — this book is different. The way it connects money, power, influence, and human behavior through real patterns I hadn't noticed before was genuinely eye-opening. It's not just theory either; the takeaways are practical and something you can actually apply in your own life. For the price it's at right now, it's an absolute steal. Highly recommend!”</p>
+            <div class="t-who">
+              <div class="t-ava" aria-hidden="true">DB</div>
+              <div><div class="t-name">Daniel Brooks
+                <svg class="vf" viewBox="0 0 24 24" aria-label="verified"><circle cx="12" cy="12" r="11" fill="#1d9bf0"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div><div class="t-sub">@danielbrooks</div></div>
+              <span class="t-chip"><svg viewBox="0 0 24 24"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L2.5 2h6.4l4.4 5.9L18.9 2zm-1.1 18h1.7L7.1 3.9H5.3L17.8 20z"/></svg>On X</span>
+            </div>
+            <div class="t-meta">Nov 15, 2026 · 3.8K likes · 482.1K views</div>
+          </div></div>
+
+          <div class="t-slide"><div class="t-card">
+            <p class="q">“Just finished The Gilded Code by Kael Varnow and it's easily one of the most eye-opening books I've read this year. It breaks down the hidden systems of power, money, and influence in a way that's both compelling and incredibly insightful. Feels like a playbook for understanding how the world really works.”</p>
+            <div class="t-who">
+              <div class="t-ava" aria-hidden="true">AM</div>
+              <div><div class="t-name">Alex Mercer
+                <svg class="vf" viewBox="0 0 24 24" aria-label="verified"><circle cx="12" cy="12" r="11" fill="#1d9bf0"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div><div class="t-sub">@alexmercerhq</div></div>
+              <span class="t-chip"><svg viewBox="0 0 24 24"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L2.5 2h6.4l4.4 5.9L18.9 2zm-1.1 18h1.7L7.1 3.9H5.3L17.8 20z"/></svg>On X</span>
+            </div>
+            <div class="t-meta">Nov 15, 2026 · 3.2K likes · 412.8K views</div>
+          </div></div>
+
+          <div class="t-slide"><div class="t-card">
+            <p class="q">“This book saved me when I was at my lowest. It taught me more than any course or even school ever could. It delivered the harsh truths that needed to be heard, and I was finally ready to take them in.”</p>
+            <div class="t-who">
+              <div class="t-ava" aria-hidden="true">EM</div>
+              <div><div class="t-name">Ethan Miller</div><div class="t-sub">Reader</div></div>
+              <span class="t-chip"><svg viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.7c0-.9.3-1.6 1.7-1.6h1.6V4.3c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v2.5H7.6V14h2.8v8h3.1z"/></svg>On Facebook</span>
+            </div>
+            <div class="t-meta">500 reactions · 6 comments</div>
+          </div></div>
+
+          <div class="t-slide"><div class="t-card">
+            <p class="q">“The Gilded Code showed me the truth. It helped me see the hidden patterns in money, power, and influence — the kind of ideas that usually only people in the upper echelon understand. It's clear, eye-opening, and honestly one of the most valuable books I've ever read. A thoughtful, practical guide that actually changes how you see the world.”</p>
+            <div class="t-who">
+              <div class="t-ava" aria-hidden="true">JC</div>
+              <div><div class="t-name">James Carter</div><div class="t-sub">Reader</div></div>
+              <span class="t-chip"><svg viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.7c0-.9.3-1.6 1.7-1.6h1.6V4.3c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v2.5H7.6V14h2.8v8h3.1z"/></svg>On Facebook</span>
+            </div>
+            <div class="t-meta">489 reactions · 20 comments</div>
+          </div></div>
+
+          <div class="t-slide"><div class="t-card">
+            <p class="q">“<b>The Gilded Code by Kael Varnow is a must-read.</b> It pulls back the curtain on how power, money, and influence really work, and shows the hidden patterns that shape decisions at the highest levels. Clear, sharp, and incredibly insightful.”</p>
+            <div class="t-who">
+              <div class="t-ava" aria-hidden="true">ER</div>
+              <div><div class="t-name">Ethan Reeves
+                <svg class="vf" viewBox="0 0 24 24" aria-label="verified"><circle cx="12" cy="12" r="11" fill="#04da8d"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div><div class="t-sub">28 reviews · US</div></div>
+              <span class="t-chip"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>Review</span>
+            </div>
+            <div class="t-meta"><span class="stars">★★★★★</span> Verified · Nov 13, 2026</div>
+          </div></div>
+
+          <div class="t-slide"><div class="t-card">
+            <p class="q">“<b>Skeptical at first, but this is the real deal.</b> I was skeptical at first, but just after the first 5 pages I realized this is the real deal. The kind of information in The Gilded Code isn't something you'll find anywhere else. It's rare, eye-opening, and honestly a steal at the price it's currently at.”</p>
+            <div class="t-who">
+              <div class="t-ava" aria-hidden="true">ST</div>
+              <div><div class="t-name">Sophia Turner
+                <svg class="vf" viewBox="0 0 24 24" aria-label="verified"><circle cx="12" cy="12" r="11" fill="#04da8d"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div><div class="t-sub">42 reviews · US</div></div>
+              <span class="t-chip"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>Review</span>
+            </div>
+            <div class="t-meta"><span class="stars">★★★★★</span> Verified · Nov 15, 2026</div>
+          </div></div>
+
+        </div>
+      </div>
+      <div class="t-nav">
+        <button class="t-arrow" id="tPrev" aria-label="Previous testimonial"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <div class="t-dots" id="tDots"></div>
+        <button class="t-arrow" id="tNext" aria-label="Next testimonial"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
     </div>
   </section>
 
@@ -646,6 +775,79 @@ async function startCheckout(e) {
   }
 }
 document.querySelectorAll('.js-buy').forEach(b => b.addEventListener('click', startCheckout));
+
+// ----- Testimonial slider -----
+// Auto-advances every ~7s; pauses while hovered, focused, or touched; swipe + arrows + dots.
+(function () {
+  const slider = document.getElementById('tSlider');
+  if (!slider) return;
+  const track = document.getElementById('tTrack');
+  const dotsWrap = document.getElementById('tDots');
+  const slides = track.children;
+  const total = slides.length;
+  let index = 0, timer = null, reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // The viewport hugs the active card's height and animates between quotes.
+  const viewport = slider.querySelector('.t-viewport');
+  function sizeActive() {
+    const card = slides[index].firstChild;
+    viewport.style.height = card.offsetHeight + 'px';
+  }
+  function render() {
+    track.style.transform = 'translateX(-' + (index * 100) + '%)';
+    [...dotsWrap.children].forEach((d, i) => d.classList.toggle('on', i === index));
+    sizeActive();
+  }
+  function goTo(i) {
+    index = (i + total) % total;
+    render();
+  }
+  function restart() {
+    if (reduced) return;
+    clearInterval(timer);
+    timer = setInterval(() => goTo(index + 1), 7000);
+  }
+  function userMove(i) { goTo(i); restart(); }
+
+  for (let i = 0; i < total; i++) {
+    const d = document.createElement('button');
+    d.className = 't-dot';
+    d.setAttribute('aria-label', 'Testimonial ' + (i + 1) + ' of ' + total);
+    d.addEventListener('click', () => userMove(i));
+    dotsWrap.appendChild(d);
+  }
+  document.getElementById('tPrev').addEventListener('click', () => userMove(index - 1));
+  document.getElementById('tNext').addEventListener('click', () => userMove(index + 1));
+
+  slider.addEventListener('mouseenter', () => clearInterval(timer));
+  slider.addEventListener('mouseleave', restart);
+  slider.addEventListener('focusin', () => clearInterval(timer));
+  slider.addEventListener('focusout', restart);
+
+  // Swipe.
+  let x0 = null;
+  track.addEventListener('pointerdown', e => { x0 = e.clientX; clearInterval(timer); }, { passive: true });
+  track.addEventListener('pointerup', e => {
+    if (x0 === null) return;
+    const dx = e.clientX - x0;
+    x0 = null;
+    if (Math.abs(dx) > 40) userMove(index + (dx < 0 ? 1 : -1));
+    else restart();
+  }, { passive: true });
+  track.addEventListener('pointercancel', () => { x0 = null; restart(); });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft' && slider.contains(document.activeElement)) userMove(index - 1);
+    if (e.key === 'ArrowRight' && slider.contains(document.activeElement)) userMove(index + 1);
+  });
+
+  sizeActive();
+  window.addEventListener('resize', sizeActive);
+  // Re-measure once fonts settle (Playfair metrics shift card height).
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(sizeActive);
+  render();
+  restart();
+})();
 
 </script>
 </body>
